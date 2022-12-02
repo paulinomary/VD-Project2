@@ -1,0 +1,16 @@
+circuits.csv
+constructor_standings.csv
+constructor_results.csv
+constructors.csv
+driver_standings.csv
+driver_results.csv
+drivers.csv
+lap_times.csv
+pit_stops.csv
+qualifying.csv
+races.csv
+seasons.csv
+sprint_results.csv
+results.csv
+status.csv
+cache/
