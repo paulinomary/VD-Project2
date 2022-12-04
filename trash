@@ -1,0 +1,147 @@
+"""sidebar = dbc.Nav(
+            [
+                dbc.NavLink(
+                    [
+                        html.Div(page["name"], className="ms-2"),
+                    ],
+                    href=page["path"],
+                    active="exact",
+                )
+                for page in dash.page_registry.values()
+            ],
+            vertical=False,
+            pills=True,
+            className="bg-light",
+)
+
+dbc.Button("Home", href="/", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+
+dbc.Button("Drivers", href="/drivers", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+
+dbc.Button("Races", href="/races", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+
+dbc.Button("Standings Race by Race", href="/standinsrace", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+
+dbc.Button("Standings Season", href="/standingsseason", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+
+dbc.Button("More About F1", href="/more", style= {'width': '200px',
+                                        'background-color': '#ffffff',
+                                        'color': '#ff0303',
+                                        'border': '10px',
+                                        'border-color': "#ff0303"
+                                    } )
+"""
+
+"""buttons = html.Div(
+    [
+        ## Button for Home Page
+        dbc.Button("Home 🏠", outline=True, style= {
+                                                'width': '200px',
+                                                'background-color': '#ffffff',
+                                                'color': '#ff0303',
+                                                'border': '10px',
+                                                'border-color': "#ff0303",
+                                                }, href = "/", className="me-1"),
+
+        ## Button for Drivers Info Page
+        dbc.Button("Drivers", outline=True, style= {
+                                                'width': '200px',
+                                                'background-color': '#ff0303',
+                                                'color': '#ffffff',
+                                                'border': '3px'
+                                                }, href = "/drivers", className="me-1"),
+
+        ## Button for Races Page
+        dbc.Button("Races", outline=True, style= {
+                                                'width': '200px',
+                                                'background-color': '#ff0303',
+                                                'color': '#ffffff',
+                                                'border': '3px'
+                                                }, href = "/races", className="me-1"),
+
+        ## Button for Standings Race by Race Page
+        dbc.Button("Standings Race by Race", outline=True, style= {
+                                                'width': '200px',
+                                                'background-color': '#ff0303',
+                                                'color': '#ffffff',
+                                                'border': '3px'
+                                                }, href = "/standingsrace", className="me-1"),
+
+        ## Button for Season Standings Page
+        dbc.Button("Season Standings", outline=True, style= {
+                                                'width': '200px',
+                                                'background-color': '#ff0303',
+                                                'color': '#ffffff',
+                                                'border': '3px'
+                                                }, href = "/standingsseason", className="me-1"),
+
+        ## Button for More About F1 Page
+        dbc.Button("More About F1", outline=True, style= {
+                                                'width': '1000px',
+                                                'background-color': '#000000',
+                                                'color': '#ff0303',
+                                                'border': '3px'
+                                                }, href = "/more", className="me-1"),
+    ]
+)"""
+
+app.layout = dbc.Container([
+    dbc.Row([
+        ## Title
+        dbc.Col(html.Div(" 🏎️ Formula1 - Red Bull Analysis 🏎️ ",
+                         style={
+                                    'background-color': '#000000',
+                                    'color': "#ff0303",
+                                    'fontSize':60, 
+                                    'textAlign': 'center'
+                                }))
+    ]),
+
+    html.Hr(),
+
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    sidebar
+                ], xs=20, sm=25, md=30, lg=35, xl=40, xxl=45),
+
+            dbc.Col(
+                [
+                    dash.page_container
+                ], xs=8, sm=8, md=10, lg=10, xl=10, xxl=10)
+        ]
+    )
+
+], fluid=True)
+
+dbc.Col(
+                [
+                    html.Img(src='assets/smoking2.jpg')
+                ], width=4
+            ),
