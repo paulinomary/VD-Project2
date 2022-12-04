@@ -110,7 +110,7 @@ dbc.Button("More About F1", href="/more", style= {'width': '200px',
     ]
 )"""
 
-app.layout = dbc.Container([
+"""app.layout = dbc.Container([
     dbc.Row([
         ## Title
         dbc.Col(html.Div(" 🏎️ Formula1 - Red Bull Analysis 🏎️ ",
@@ -145,3 +145,166 @@ dbc.Col(
                     html.Img(src='assets/smoking2.jpg')
                 ], width=4
             ),
+
+
+
+import dash
+from dash import html, dcc
+import dash_bootstrap_components as dbc
+
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.SPACELAB])
+sidebar = dbc.Nav(
+            [
+                dbc.NavLink(
+                    [
+                        html.Div(page["name"], className="ms-2"),
+                    ],
+                    href=page["path"],
+                    active="exact",
+                )
+                for page in dash.page_registry.values()
+            ],
+            vertical=True,
+            pills=True,
+            className="bg-light",
+)
+
+app.layout = dbc.Container([
+    dbc.Row([
+        dbc.Col(html.Div("Python Multipage App with Dash",
+                         style={'fontSize':50, 'textAlign':'center'}))
+    ]),
+
+    html.Hr(),
+
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    sidebar
+                ], xs=4, sm=4, md=2, lg=2, xl=2, xxl=2),
+
+            dbc.Col(
+                [
+                    dash.page_container
+                ], xs=8, sm=8, md=10, lg=10, xl=10, xxl=10)
+        ]
+    )
+], fluid=True)
+
+
+if __name__ == "__main__":
+    app.run(debug=False)
+
+
+    navbar = dbc.Navbar(
+    dbc.Container(
+        [
+            html.A(
+                dbc.Row(
+                    dbc.Col(dbc.NavbarBrand("Formula 1 - Red Bull Analysis 🏎️", className="ms-2")),
+                    align="center",
+                    className="g-0",
+                ),
+                href="/",
+                style={"textDecoration": "none"},
+            ),
+            dbc.Row(
+                [
+                    dbc.NavbarToggler(id="navbar-toggler"),
+                    dbc.Collapse(
+                        dbc.Nav(
+                            [   dbc.NavItem(dbc.NavLink("Races", href = "/races", style= {'color': '#9e9e9e'})),
+                                dbc.NavItem(dbc.NavLink("Standings Race by Race", href = "/standingsrace", style= {'color': '#9e9e9e'})),
+                                dbc.NavItem(dbc.NavLink("Standings Season", href = "/standingsseason", style= {'color': '#9e9e9e'}),className="me-auto"),
+                                dbc.NavItem(dbc.Button("More About Formula 1", active=True, outline = True, href = "https://www.formula1.com/", style= {'color': '#ff0303', 'background-color':'#ffffff'})),
+                            ],
+                            className="w-100",
+                        ),
+                        id="navbar-collapse",
+                        is_open=False,
+                        navbar=True,
+                    ),
+                ],
+                className="flex-grow-1",
+            ),
+        ],
+        fluid=True,
+    ),
+    dark=True,
+    color="dark",
+)
+
+app.layout = dbc.Container([
+
+    dbc.Row(
+        [navbar, dash.page_container]
+    ),
+
+], fluid=True)
+
+
+
+if __name__ == "__main__":
+    app.run(debug=False)
+
+"""
+#OUR APP.PY
+"""import dash
+from dash import html, dcc
+import dash_bootstrap_components as dbc
+
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.YETI])
+
+navbar = dbc.Navbar(
+    dbc.Container(
+        [
+            html.A(
+                dbc.Row(
+                    dbc.Col(dbc.NavbarBrand("Formula 1 - Red Bull Analysis 🏎️", className="ms-2")),
+                    align="center",
+                    className="g-0",
+                ),
+                href="/",
+                style={"textDecoration": "none"},
+            ),
+            dbc.Row(
+                [
+                    dbc.NavbarToggler(id="navbar-toggler"),
+                    dbc.Collapse(
+                        dbc.Nav(
+                            [   dbc.NavItem(dbc.NavLink("Home", href="/", style={'color':'#9e9e9e'})),
+                                dbc.NavItem(dbc.NavLink("Races", href = "/races", style= {'color': '#9e9e9e'})),
+                                dbc.NavItem(dbc.NavLink("Standings Race by Race", href = "/standingsrace", style= {'color': '#9e9e9e'})),
+                                dbc.NavItem(dbc.NavLink("Standings Season", href = "/standingsseason", style= {'color': '#9e9e9e'}),className="me-auto"),
+                                dbc.NavItem(dbc.Button("More About Formula 1", active=True, outline = True, href = "https://www.formula1.com/", style= {'color': '#ff0303', 'background-color':'#ffffff'})),
+                            ],
+                            className="w-100",
+                        ),
+                        id="navbar-collapse",
+                        is_open=False,
+                        navbar=True,
+                    ),
+                ],
+                className="flex-grow-1",
+            ),
+        ],
+        fluid=True,
+    ),
+    dark=True,
+    color="dark",
+)
+
+app.layout = dbc.Container([
+    dbc.Row(
+        [
+           navbar, dash.page_container
+        ]
+    )
+], fluid=True)
+
+
+if __name__ == "__main__":
+    app.run(debug=False)
+
+"""
