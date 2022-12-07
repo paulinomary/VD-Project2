@@ -1,32 +1,3 @@
-import dash
-from dash import dcc, html, Output, Input, callback
-import pandas as pd
-import dash_bootstrap_components as dbc
-import plotly.graph_objs as go
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import plotly.express as px
-import math
-
-
-dash.register_page(__name__, name='Season Standings')
-
-circuits = pd.read_csv("circuits.csv")
-constructor_results = pd.read_csv("constructor_results.csv")
-constructor_standings = pd.read_csv("constructor_standings.csv")
-constructors = pd.read_csv("constructors.csv")
-driver_standings = pd.read_csv("driver_standings.csv")
-drivers = pd.read_csv("drivers.csv")
-lap_times = pd.read_csv("lap_times.csv")
-pit_stops = pd.read_csv("pit_stops.csv")
-qualifying =pd.read_csv("qualifying.csv")
-races = pd.read_csv("races.csv")
-results = pd.read_csv("results.csv")
-seasons = pd.read_csv("seasons.csv")
-sprint_results = pd.read_csv("sprint_results.csv")
-status = pd.read_csv("status.csv")
-
 # Dataframe Construction
 df = pd.merge(lap_times,drivers[['driverId','code','driverRef']],how='left',on='driverId')
 df = pd.merge(df,races[['raceId','name','date','year']],how='left',on='raceId')
@@ -125,7 +96,12 @@ top2019 = viz2019[viz2019.loc[:,'year'] == 2019]
 top2019 = top2019.groupby(['surname'])[['points','wins']].max().sort_values('points',ascending = False).head(20).reset_index()
 
 # fig shows the bar graph of 2019 season points for all drivers
-
+fig2019 = px.bar(top2019, x='surname', y='points',hover_data=['wins'], color='points',color_continuous_scale='greys',height=400, text_auto=True)
+fig2019.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
+fig2019.update_xaxes(showgrid=False)
+fig2019.update_yaxes(showgrid=False)
+fig2019.update_layout(layout)
+fig2019.show()
 
 #df 2020
 df_2020_2 = df2[df2['year'] == 2020]
@@ -154,7 +130,13 @@ viz2020.date = pd.to_datetime(viz2020.date)
 top2020 = viz2020[viz2020.loc[:,'year'] == 2020]
 top2020 = top2020.groupby(['surname'])[['points','wins']].max().sort_values('points',ascending = False).head(20).reset_index()
 
+fig2020 = px.bar(top2020, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys',text_auto=True)
+fig2020.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
+fig2020.update_xaxes(showgrid=False)
+fig2020.update_yaxes(showgrid=False)
+fig2020.update_layout(layout)
 
+fig2020.show()
 
 # 2021 Season races info
 
@@ -186,7 +168,13 @@ viz2021.date = pd.to_datetime(viz2021.date)
 top2021 = viz2021[viz2021.loc[:,'year'] == 2021]
 top2021 = top2021.groupby(['surname'])[['points','wins']].max().sort_values('points',ascending = False).head(20).reset_index()
 
+fig2021 = px.bar(top2021, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys',text_auto = True)
+fig2021.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
+fig2021.update_xaxes(showgrid=False)
+fig2021.update_yaxes(showgrid=False)
+fig2021.update_layout(layout)
 
+fig2021.show()
 
 # 2022 Season races info
 
@@ -218,49 +206,10 @@ viz2022.date = pd.to_datetime(viz2022.date)
 top2022 = viz2022[viz2022.loc[:,'year'] == 2022]
 top2022 = top2022.groupby(['surname'])[['points','wins']].max().sort_values('points',ascending = False).head(20).reset_index()
 
-layout = html.Div([
-    html.P("Choose the Season: "),
-    
-    dcc.Dropdown(id="dropdown",
-        options=[
-            {'label': x, 'value': x}
-for x in ['2019', '2020', '2021', '2022']
-],
-value='2019', clearable=False,),
+fig2022 = px.bar(top2022, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys', text_auto=True)
+fig2022.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
+fig2022.update_xaxes(showgrid=False)
+fig2022.update_yaxes(showgrid=False)
+fig2022.update_layout(layout)
 
-        dcc.Graph(id='season'),
-    ])
-
-@callback([Output('season','figure')], 
-    [Input('dropdown','value')])
-
-def display_figure(value):
-    print(value)
-
-    if value == '2019':
-        fig2019 = px.bar(top2019, x='surname', y='points',hover_data=['wins'], color='points',color_continuous_scale='greys',height=400, text_auto=True)
-        fig2019.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
-        fig2019.update_xaxes(showgrid=False)
-        fig2019.update_yaxes(showgrid=False)
-        return fig2019
-
-    elif value == '2020':
-        fig2020 = px.bar(top2020, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys',text_auto=True)
-        fig2020.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
-        fig2020.update_xaxes(showgrid=False)
-        fig2020.update_yaxes(showgrid=False)
-        return fig2020
-
-    elif value == '2021':
-        fig2021 = px.bar(top2021, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys',text_auto = True)
-        fig2021.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
-        fig2021.update_xaxes(showgrid=False)
-        fig2021.update_yaxes(showgrid=False)
-        return fig2021
-
-    elif value == '2022':
-        fig2022 = px.bar(top2022, x='surname', y='points',hover_data=['wins'], color='points',height=400,color_continuous_scale= 'greys', text_auto=True)
-        fig2022.update_traces(textfont_size=20,marker=dict(line=dict(color='#000000', width=2)),textposition="outside", cliponaxis=False)
-        fig2022.update_xaxes(showgrid=False)
-        fig2022.update_yaxes(showgrid=False)
-        return fig2022
+fig2022.show()

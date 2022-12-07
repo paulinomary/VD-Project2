@@ -8,6 +8,15 @@ dash.register_page(__name__, name='Home', href='/')
 # page 2 data
 df = px.data.tips()
 
+dropdown = dbc.DropdownMenu(
+    label="Menu",
+    children=[
+        dbc.DropdownMenuItem("Item 1"),
+        dbc.DropdownMenuItem("Item 2"),
+        dbc.DropdownMenuItem("Item 3"),
+    ],
+)
+
 layout = html.Div(
     [
         dbc.Row([

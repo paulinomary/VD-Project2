@@ -22,6 +22,7 @@ navbar = dbc.Navbar(
                     dbc.Collapse(
                         dbc.Nav(
                             [   #dbc.NavItem(dbc.NavLink("Home", href="/home", style={'color':'#9e9e9e'})),
+                                #dbc.NavItem(dbc.NavLink("Drivers", href = "/drivers", style= {'color': '#9e9e9e'})),
                                 dbc.NavItem(dbc.NavLink("Races", href = "/races", style= {'color': '#9e9e9e'})),
                                 dbc.NavItem(dbc.NavLink("Standings Race by Race", href = "/racestandings", style= {'color': '#9e9e9e'})),
                                 dbc.NavItem(dbc.NavLink("Standings Season", href = "/seasonstandings", style= {'color': '#9e9e9e'}),className="me-auto"),
@@ -52,4 +53,4 @@ app.layout = dbc.Container([
 ], fluid=True)
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run_server(debug=True)
