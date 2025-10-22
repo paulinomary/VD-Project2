@@ -17,6 +17,7 @@ value='#37bbe7', clearable=False,
 @app.callback(
     Output("graph", "figure"),
     [Input("dropdown", "value")])
+
 def display_color(color): 
     print(color)
     fig = go.Figure(
